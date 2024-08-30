@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Control Detail{% endblock %}
+
+{% block content %}
+    <h1>{{ control.name }}</h1>
+    <p>{{ control.description }}</p>
+    <p>Status: {{ control.get_status_display }}</p>
+    <p>Priority: {{ control.get_priority_display }}</p>
+    <p>Last Updated: {{ control.last_updated }}</p>
+    <a href="{% url 'helix:control_update' control.pk %}" class="btn btn-secondary">Edit</a>
+    <a href="{% url 'helix:control_delete' control.pk %}" class="btn btn-danger">Delete</a>
+    <a href="{% url 'helix:control_list' %}" class="btn btn-primary">Back to List</a>
+{% endblock %}

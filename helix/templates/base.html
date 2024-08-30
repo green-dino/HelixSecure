@@ -1,0 +1,28 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Control Framework{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- SEO Enhancements -->
+    <meta name="description" content="Manage your organization's controls efficiently with the Control Framework.">
+    <meta name="keywords" content="controls, cybersecurity, compliance, risk management, governance">
+    <meta property="og:title" content="Control Framework">
+    <meta property="og:description" content="Manage your organization's controls efficiently with the Control Framework.">
+    <meta property="og:type" content="website">
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="container mt-4">
+        {% block content %}{% endblock %}
+    </div>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

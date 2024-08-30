@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Control List{% endblock %}
+
+{% block content %}
+    <h1>Control List</h1>
+    <ul>
+        {% for control in controls %}
+            <li>
+                <a href="{% url 'helix:control_detail' control.pk %}">{{ control.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'helix:control_create' %}" class="btn btn-primary">Create New Control</a>
+{% endblock %}
