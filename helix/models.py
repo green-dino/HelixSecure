@@ -24,6 +24,28 @@ class Control(models.Model):
         COLLECT_AND_OPERATE = 'Collect and Operate', _('Collect and Operate')
         INVESTIGATE = 'Investigate', _('Investigate')
 
+    class DetectionChoices(models.TextChoices):
+        ATOMIC = 'Atomic', _('Atomic')
+        BEHAVIORAL_ATOMIC = 'Behavioral, Atomic', _('Behavioral, Atomic')
+        STATISTICAL = 'Statistical', _('Statistical')
+
+    class SignalsChoices(models.TextChoices):
+        BAGGAGE = 'Baggage', _('Baggage')
+        TRACES = 'Traces', _('Traces')
+
+    class ComponentsChoices(models.TextChoices):
+        DATA = 'Data', _('Data')
+        SDK = 'SDK', _('SDK')
+
+    class SpanChoices(models.TextChoices):
+        UNSET = 'Unset', _('Unset')
+        DATA = 'Data', _('Data')
+
+    class MetricChoices(models.TextChoices):
+        COUNTER = 'Counter', _('Counter')
+        MEASURE = 'Measure', _('Measure')
+        OBSERVER = 'Observer', _('Observer')
+
     class Meta:
         verbose_name = _('Control')
         verbose_name_plural = _('Controls')
@@ -73,13 +95,13 @@ class Control(models.Model):
 
     visibility = models.CharField(_('Visibility'), max_length=255)
     alerting = models.CharField(_('Alerting'), max_length=255)
-    detection = models.CharField(_('Detection'), max_length=255)
+    detection = models.CharField(_('Detection'), max_length=255, choices=DetectionChoices.choices)
     telemetry = models.CharField(_('Telemetry'), max_length=255)
-    signals = models.CharField(_('Signals'), max_length=255)
+    signals = models.CharField(_('Signals'), max_length=255, choices=SignalsChoices.choices)
 
     components = models.JSONField(_('Components'), help_text=_("List of components covered by this control."))
-    span = models.CharField(_('Span'), max_length=255, help_text=_("The span of control (e.g., organization-wide, departmental)"))
-    metric = models.CharField(_('Metric'), max_length=255, help_text=_("Metric used to measure control effectiveness"))
+    span = models.CharField(_('Span'), max_length=255, choices=SpanChoices.choices, help_text=_("The span of control (e.g., organization-wide, departmental)"))
+    metric = models.CharField(_('Metric'), max_length=255, choices=MetricChoices.choices, help_text=_("Metric used to measure control effectiveness"))
     report = models.TextField(_('Report'), help_text=_("Details on how the control's effectiveness is reported"))
 
     discussion = models.TextField(_('Discussion'))
