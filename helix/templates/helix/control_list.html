@@ -4,12 +4,32 @@
 
 {% block content %}
     <h1>Control List</h1>
-    <ul>
-        {% for control in controls %}
-            <li>
-                <a href="{% url 'helix:control_detail' control.pk %}">{{ control.name }}</a>
-            </li>
-        {% endfor %}
-    </ul>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Short Number</th>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Priority</th>
+                <th>Last Updated</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for control in controls %}
+                <tr>
+                    <td>{{ control.control_short_number }}</td>
+                    <td><a href="{% url 'helix:control_detail' control.pk %}">{{ control.name }}</a></td>
+                    <td>{{ control.get_status_display }}</td>
+                    <td>{{ control.get_priority_display }}</td>
+                    <td>{{ control.last_updated }}</td>
+                    <td>
+                        <a href="{% url 'helix:control_update' control.pk %}" class="btn btn-secondary btn-sm">Edit</a>
+                        <a href="{% url 'helix:control_delete' control.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
     <a href="{% url 'helix:control_create' %}" class="btn btn-primary">Create New Control</a>
 {% endblock %}
